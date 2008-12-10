@@ -1,0 +1,84 @@
+<?php
+// 
+//     This file is part of Lucterios.
+// 
+//     Lucterios is free software; you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation; either version 2 of the License, or
+//     (at your option) any later version.
+// 
+//     Lucterios is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//     GNU General Public License for more details.
+// 
+//     You should have received a copy of the GNU General Public License
+//     along with Lucterios; if not, write to the Free Software
+//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// 
+// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+//  // Method file write by SDK tool
+// --- Last modification: Date 08 December 2008 21:39:46 By  ---
+
+require_once('CORE/xfer_exception.inc.php');
+require_once('CORE/rights.inc.php');
+
+//@TABLES@
+require_once('CORE/groups.tbl.php');
+require_once('extensions/org_lucterios_documents/categorie.tbl.php');
+//@TABLES@
+
+//@DESC@Editer une categorie
+//@PARAM@ posX
+//@PARAM@ posY
+//@PARAM@ xfer_result
+
+function categorie_APAS_edit(&$self,$posX,$posY,$xfer_result)
+{
+//@CODE_ACTION@
+$xfer_result->setDBObject($self,"nom",false,$posY++,$posX);
+$xfer_result->setDBObject($self,"description",false,$posY++,$posX);
+
+$lbl=new xfer_comp_LabelForm('labelvisualisation');
+$lbl->setLocation($posX,$posY);
+$lbl->setValue("{[bold]}Groupes de consultation{[/bold]}");
+$xfer_result->addComponent($lbl);
+$sel=new Xfer_Comp_CheckList('visualisation');
+$sel->setLocation($posX+1,$posY++);
+$val=array();
+$visu=$self->getfield('visualisation');
+while($visu->fetch())
+	$val[]=$visu->groupe;
+$sel->setValue($val);
+$select=array();
+$DBGroup=new DBObj_CORE_groups;
+$DBGroup->find();
+while ($DBGroup->fetch()) 
+	$select[$DBGroup->id]=$DBGroup->toText();
+$sel->setSelect($select);
+$xfer_result->addComponent($sel);
+
+$lbl=new xfer_comp_LabelForm('labelmodification');
+$lbl->setLocation($posX,$posY);
+$lbl->setValue("{[bold]}Groupes de modification{[/bold]}");
+$xfer_result->addComponent($lbl);
+$sel=new Xfer_Comp_CheckList('modification');
+$sel->setLocation($posX+1,$posY++);
+$val=array();
+$modif=$self->getfield('modification');
+while($modif->fetch())
+	$val[]=$modif->groupe;
+$sel->setValue($val);
+$select=array();
+$DBGroup=new DBObj_CORE_groups;
+$DBGroup->find();
+while ($DBGroup->fetch()) 
+	$select[$DBGroup->id]=$DBGroup->toText();
+$sel->setSelect($select);
+$xfer_result->addComponent($sel);
+
+return $xfer_result;
+//@CODE_ACTION@
+}
+
+?>

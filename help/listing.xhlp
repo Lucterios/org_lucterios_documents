@@ -1,0 +1,12 @@
+<h1>Liste des documents</h1>
+Le menu <i>Bureautique/Gestion documentaire/Liste des documents</i> vous permet de consulter la liste des fichiers que vous avez déjà enregistrées.
+Pour vous aider à retrouver vos documents, la liste est classifiée par un ensemble de catégorie et une description vous donne un petit résumé.<br>
+<br>
+<center><img src='~org_lucterios_documents$ListDocuments.jpg' alt='ListDocuments.jpg' /></center><br>
+Suivant vos permissions, vous pouvez extraire votre fichier pour consultation, le modifier et éventuellement ré-injecter vos corrections.<br>
+De plus, l'outil mémorisera l'utilisateur et la date de création du document ainsi que les informations relatives à la dernière modification.<br>
+<br>
+<center><img src='~org_lucterios_documents$Documents.jpg' alt='Documents.jpg' /></center><br>
+<h1>Recherche de documents</h1>
+Le menu <i>Bureautique/Gestion documentaire/Recherche</i> vous permet de définir une critère de recherche sur un document.<br>
+Une fois valider, l'outil va rechercher dans la base toutes les fichiers correspondants à ces critères.<br>
