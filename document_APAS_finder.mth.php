@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 08 December 2008 23:13:51 By  ---
+// --- Last modification: Date 16 December 2008 23:51:49 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -44,9 +44,9 @@ $cat->setSelect($DBCat->getVisuList());
 
 $xfer_result->setDBSearch($self,"description",$posY++);
 $xfer_result->setDBSearch($self,"modificateur",$posY++);
-//$xfer_result->setDBSearch($self,"dateModification",$posY++);
+$xfer_result->setDBSearch($self,"dateModification",$posY++);
 $xfer_result->setDBSearch($self,"createur",$posY++);
-//$xfer_result->setDBSearch($self,"dateCreation",$posY++);
+$xfer_result->setDBSearch($self,"dateCreation",$posY++);
 return $xfer_result;
 //@CODE_ACTION@
 }
