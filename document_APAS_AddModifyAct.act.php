@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 08 December 2008 22:46:51 By  ---
+// --- Last modification: Date 04 March 2009 19:33:17 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -60,6 +60,12 @@ $self->setFrom($Params);
 
 global $LOGIN_ID;
 
+if (array_key_exists('docfile',$Params) && ($_FILES['docfile']['tmp_name']=='')) {
+	require_once "CORE/Lucterios_Error.inc.php";
+	require_once "CORE/fichierFonctions.inc.php";
+	throw new LucteriosException(IMPORTANT,"fichier non téléchargé!{[newline]}Taille maximum ".convert_taille(taille_max_dl_fichier()));
+}
+
 $self->modificateur=$LOGIN_ID;
 $self->dateModification=date('Y-m-d G:i:s');
 if ($find)
@@ -71,7 +77,10 @@ else {
 }
 
 if (array_key_exists('docfile',$Params)) {
-	$path = "usr/org_lucterios_documents";
+	global $rootPath;
+	if(!isset($rootPath))
+		$rootPath = "";
+	$path = $rootPath."usr/org_lucterios_documents";
 	if(!is_dir($path))
 		@mkdir($path,0777);
 	$destination_file = $path."/document".$self->id;
@@ -84,13 +93,10 @@ if (array_key_exists('docfile',$Params)) {
 		throw new LucteriosException(IMPORTANT,"fichier non sauvé!");
 	}
 	if (!$find) {
-		if ($zip=zip_open($destination_file)) {
-    			if ($zip_entry = zip_read($zip)) {
-				$self->nom=zip_entry_name($zip_entry);
-				$self->update();
-			}
-			zip_close($zip);
-		}
+		$self->nom="inconnu";
+		if (array_key_exists('docfile_FILENAME',$Params))
+			$self->nom=$Params['docfile_FILENAME'];
+		$self->update();
 	}
 }
 //@CODE_ACTION@

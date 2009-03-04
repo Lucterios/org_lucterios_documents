@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 08 December 2008 21:41:17 By  ---
+// --- Last modification: Date 06 February 2009 23:57:34 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -33,7 +33,7 @@ require_once('CORE/xfer.inc.php');
 //@XFER:acknowledge@
 
 
-//@DESC@Valider une catégorie
+//@DESC@Valider un dossier
 //@PARAM@ categorie
 //@PARAM@ visualisation
 //@PARAM@ modification
@@ -55,7 +55,7 @@ global $connect;
 $connect->begin();
 try {
 $xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_documents","categorie_APAS_AddModifyAct",$Params);
-$xfer_result->Caption="Valider une catégorie";
+$xfer_result->Caption="Valider un dossier";
 //@CODE_ACTION@
 if($categorie>0)
 	$find=$self->get($categorie);

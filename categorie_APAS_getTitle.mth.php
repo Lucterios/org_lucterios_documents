@@ -18,32 +18,27 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 06 February 2009 23:29:12 By  ---
+// --- Last modification: Date 06 February 2009 23:51:02 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
-require_once('extensions/org_lucterios_documents/document.tbl.php');
+require_once('extensions/org_lucterios_documents/categorie.tbl.php');
 //@TABLES@
 
-//@DESC@getList de document
-//@PARAM@ IsSearch
-//@PARAM@ readonly
-//@PARAM@ Params
+//@DESC@
+//@PARAM@ 
 
-function document_APAS_getGrid(&$self,$IsSearch,$readonly,$Params)
+function categorie_APAS_getTitle(&$self)
 {
 //@CODE_ACTION@
-$grid = new Xfer_Comp_Grid("document");
-$grid->setDBObject($self,$IsSearch?5:array('nom','description','modificateur','dateModification'),'',$Params);
-$grid->addAction($self->newAction("_Editer", "edit.png", "Fiche", FORMTYPE_MODAL,CLOSE_NO, SELECT_SINGLE));
-if (!$readonly) {
-	$grid->addAction($self->newAction("_Supprimer", "suppr.png", "Del", FORMTYPE_MODAL,CLOSE_NO, SELECT_SINGLE));
-	$grid->addAction($self->newAction("_Ajouter", "add.png", "AddModify",FORMTYPE_MODAL,CLOSE_NO, SELECT_NONE));
+if ($self->parent>0) {
+	$Parent=$self->getField('parent');
+	return $Parent->getTitle().">".$self->toText();
 }
-$grid->setSize(100,700);
-return $grid;
+else
+	return ">".$self->toText();
 //@CODE_ACTION@
 }
 

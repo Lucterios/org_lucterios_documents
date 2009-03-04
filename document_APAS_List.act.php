@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 09 December 2008 22:35:26 By  ---
+// --- Last modification: Date 08 February 2009 13:16:22 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -53,7 +53,7 @@ $img->setLocation(0,0);
 $img->setValue("document.png");
 $xfer_result->addComponent($img);
 $lbl=new  Xfer_Comp_LabelForm("titre");
-$lbl->setLocation(1,0,3);
+$lbl->setLocation(1,0,4);
 $xfer_result->addComponent($lbl);
 $readonly=true;
 if ($IsSearch!=0)
@@ -62,53 +62,68 @@ if ($IsSearch!=0)
 	$self->setForSearch($Params,'categorie',"org_lucterios_documents_document.categorie=org_lucterios_documents_visualisation.categorie AND
  org_lucterios_documents_visualisation.Groupe=CORE_users.groupId AND CORE_users.id=$LOGIN_ID",array('org_lucterios_documents_visualisation','CORE_users'));
 	$lbl->setValue("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[/center]}");
+	$grid_x=0;
 }
 else {
 	$lbl->setValue("{[center]}{[bold]}Liste des documents{[/bold]}{[/center]}");
 
 	$lbl=new  Xfer_Comp_LabelForm('lblcat');
-	$lbl->setValue("{[bold]}Catégorie{[/bold]}");
-	$lbl->setLocation(1,1,2);
-	$lbl->setSize(20,120);
+	$lbl->setValue("{[bold]}Dossier courant:{[/bold]}");
+	$lbl->setLocation(0,1);
 	$xfer_result->addComponent($lbl);
-	$DBcat=new DBObj_org_lucterios_documents_categorie;
-	$list=$DBcat->getVisuList();
-	if (count($list)==0) {
-		require_once('CORE/Lucterios_Error.inc.php');
-		throw new LucteriosException(IMPORTANT,"Aucune catégorie n'est accessible!");
-	}
-	if ($categorie==0) {
-		$key=array_keys($list);
-		$categorie=$key[0];
-	}
-	$lbl=new Xfer_Comp_Select('categorie');
-	$lbl->setSelect($list);
-	$lbl->setValue($categorie);
-	$lbl->setSize(20,100);
-	$lbl->setLocation(1,2,2);
-	$lbl->setAction($self->NewAction('','','List',FORMTYPE_REFRESH,CLOSE_NO));
-	$xfer_result->addComponent($lbl);
-	$self->categorie=$categorie;
-	$self->find();
 
 	$DBcat=new DBObj_org_lucterios_documents_categorie;
 	$DBcat->get($categorie);
 	$readonly=$DBcat->readonly();
+	$list_folders=array();
+	if ($categorie>0)
+		$list_folders[$DBcat->parent]="..";
+
+	$lbl=new  Xfer_Comp_LabelForm('lbltitlecat');
+	if ($categorie>0)
+		$lbl->setValue($DBcat->getTitle());
+	else
+		$lbl->setValue('>');
+	$lbl->setLocation(1,1,2);
+	$xfer_result->addComponent($lbl);
+
 	$lbl=new  Xfer_Comp_LabelForm('lbldesc');
 	$lbl->setValue("{[center]}{[italic]}".$DBcat->description."{[/italic]}{[/center]}");
-	$lbl->setLocation(3,1,1,2);
+	$lbl->setLocation(3,1);
 	$xfer_result->addComponent($lbl);
+
+	$grid_x=2;
+	$DBcat=new DBObj_org_lucterios_documents_categorie;
+	$list=$DBcat->getVisuList((int)$categorie);
+	foreach($list as $id=>$name)
+		$list_folders[$id]=$name;
+	$lbl=new Xfer_Comp_CheckList('categorie');
+	$lbl->simple=true;
+	$lbl->setSelect($list_folders);
+	$lbl->setLocation(0,3,$grid_x);
+	$lbl->setSize(100,50);
+	$lbl->setAction($self->NewAction('','','List',FORMTYPE_REFRESH,CLOSE_NO));
+	$xfer_result->addComponent($lbl);
+
+	$lbl=new  Xfer_Comp_Button('btnConfig');
+	$lbl->setLocation(0,4,$grid_x);
+	$lbl->setAction($DBcat->NewAction('_Dossiers...','','List',FORMTYPE_MODAL,CLOSE_NO));
+	$xfer_result->addComponent($lbl);
+
+	$self->categorie=$categorie;
+	$self->find();
 }
 $grid = $self->getGrid($IsSearch,$readonly,$Params);
-$grid->setLocation(0,3,4);
+$grid->setLocation($grid_x,3,4-$grid_x);
 $xfer_result->addComponent($grid);
 $lbl=new Xfer_Comp_LabelForm("nb");
-$lbl->setLocation(0, 4,4);
-$lbl->setValue("Nombre affichés : ".count($grid->m_records));
+$lbl->setLocation($grid_x,4,4-$grid_x);
+$lbl->setValue("Nombre total : ".$grid->mNbLines);
 $xfer_result->addComponent($lbl);
 if ($IsSearch!=0)
 	$xfer_result->addAction($self->NewAction("Nouvelle _Recherche","search.png","Search",FORMTYPE_MODAL,CLOSE_YES));
 $xfer_result->addAction(new Xfer_Action("_Fermer", "close.png"));
+$xfer_result->m_context['current_categorie']=$categorie;
 //@CODE_ACTION@
 }catch(Exception $e) {
 	throw $e;

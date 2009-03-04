@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // table file write by SDK tool
-// --- Last modification: Date 08 December 2008 21:44:13 By  ---
+// --- Last modification: Date 07 February 2009 0:00:14 By  ---
 
 require_once('CORE/DBObject.inc.php');
 
@@ -36,9 +36,10 @@ class DBObj_org_lucterios_documents_categorie extends DBObj_Basic
 
 	var $nom;
 	var $description;
+	var $parent;
 	var $visualisation;
 	var $modification;
-	var $__DBMetaDataField=array('nom'=>array('description'=>'Nom', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>50, 'Multi'=>false)), 'description'=>array('description'=>'Description', 'type'=>7, 'notnull'=>false, 'params'=>array()), 'visualisation'=>array('description'=>'Groupes de consultation', 'type'=>9, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_visualisation', 'RefField'=>'categorie')), 'modification'=>array('description'=>'Groupes de modification', 'type'=>9, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_modification', 'RefField'=>'categorie')));
+	var $__DBMetaDataField=array('nom'=>array('description'=>'Nom', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>50, 'Multi'=>false)), 'description'=>array('description'=>'Description', 'type'=>7, 'notnull'=>false, 'params'=>array()), 'parent'=>array('description'=>'Dossier Parent', 'type'=>10, 'notnull'=>true, 'params'=>array('TableName'=>'org_lucterios_documents_categorie')), 'visualisation'=>array('description'=>'Groupes de consultation', 'type'=>9, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_visualisation', 'RefField'=>'categorie')), 'modification'=>array('description'=>'Groupes de modification', 'type'=>9, 'notnull'=>true, 'params'=>array('TableName'=>'org_lucterios_documents_modification', 'RefField'=>'categorie')));
 
 	var $__toText='$nom';
 }

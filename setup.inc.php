@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 25 January 2009 23:53:36 By  ---
+// --- Last modification: Date 04 March 2009 19:36:12 By  ---
 
 $extention_name="org_lucterios_documents";
 $extention_description="Gestion de documents et de fichiers partagés";
@@ -29,8 +29,8 @@ $extension_libre=true;
 
 $version_max=0;
 $version_min=90;
-$version_release=1;
-$version_build=3;
+$version_release=5;
+$version_build=103;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 0, 93, 0, 90, false);
@@ -50,9 +50,9 @@ $menus[4] = new Param_Menu("Documentation", "Document", "categorie_APAS_List", "
 $menus[5] = new Param_Menu("Bureautique", "", "", "bureau.png", "", 60 , 0, "Outils bureautiques");
 
 $actions=array();
-$actions[0] = new Param_Action("Valider une catégorie", "categorie_APAS_AddModifyAct", 3);
-$actions[1] = new Param_Action("Ajouter/Modifier une catégorie", "categorie_APAS_AddModify", 3);
-$actions[2] = new Param_Action("Supprimer une catégorie", "categorie_APAS_Del", 3);
+$actions[0] = new Param_Action("Valider un dossier", "categorie_APAS_AddModifyAct", 3);
+$actions[1] = new Param_Action("Ajouter/Modifier un dossier", "categorie_APAS_AddModify", 3);
+$actions[2] = new Param_Action("Supprimer un dossier", "categorie_APAS_Del", 3);
 $actions[3] = new Param_Action("Liste des catégories", "categorie_APAS_List", 3);
 $actions[4] = new Param_Action("Valider un document", "document_APAS_AddModifyAct", 1);
 $actions[5] = new Param_Action("Ajouter/Modifier un document", "document_APAS_AddModify", 1);
@@ -64,7 +64,7 @@ $actions[9] = new Param_Action("Rechercher un document", "document_APAS_Search",
 $params=array();
 
 $extend_tables=array();
-$extend_tables["categorie"] = array("org_lucterios_documents.categorie","",array());
+$extend_tables["categorie"] = array("org_lucterios_documents.categorie","",array("org_lucterios_documents_categorie"=>"parent",));
 $extend_tables["document"] = array("org_lucterios_documents.document","",array("org_lucterios_documents_categorie"=>"categorie","CORE_users"=>"createur",));
 $extend_tables["modification"] = array("org_lucterios_documents.modification","",array("org_lucterios_documents_categorie"=>"categorie","CORE_groups"=>"groupe",));
 $extend_tables["visualisation"] = array("org_lucterios_documents.visualisation","",array("org_lucterios_documents_categorie"=>"categorie","CORE_groups"=>"groupe",));

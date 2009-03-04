@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 08 December 2008 0:02:05 By  ---
+// --- Last modification: Date 06 February 2009 23:58:44 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -31,7 +31,7 @@ require_once('CORE/xfer.inc.php');
 //@XFER:acknowledge@
 
 
-//@DESC@Supprimer une catégorie
+//@DESC@Supprimer un dossier
 //@PARAM@ 
 //@INDEX:categorie
 
@@ -51,14 +51,14 @@ global $connect;
 $connect->begin();
 try {
 $xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_documents","categorie_APAS_Del",$Params);
-$xfer_result->Caption="Supprimer une catégorie";
+$xfer_result->Caption="Supprimer un dossier";
 $xfer_result->m_context['ORIGINE']="categorie_APAS_Del";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;
 $xfer_result->m_context['RECORD_ID']=$self->id;
 //@CODE_ACTION@
 if($self->canBeDelete()!=0)
-	$xfer_result->message("Suppression impossible: cette catégorie est utilisée!");
-else if($xfer_result->confirme("Etes vous sûre de vouloir supprimer cette catégorie?"))
+	$xfer_result->message("Suppression impossible: ce dossier est utilisée!");
+else if($xfer_result->confirme("Etes vous sûre de vouloir supprimer ce dossier?"))
 	$self->deleteCascade();
 //@CODE_ACTION@
 	$xfer_result->setCloseAction(new Xfer_Action('unlock','','CORE','UNLOCK',FORMTYPE_MODAL,CLOSE_YES,SELECT_NONE));

@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // table file write by SDK tool
-// --- Last modification: Date 08 December 2008 22:46:27 By  ---
+// --- Last modification: Date 07 February 2009 0:00:38 By  ---
 
 require_once('CORE/DBObject.inc.php');
 
@@ -41,7 +41,7 @@ class DBObj_org_lucterios_documents_document extends DBObj_Basic
 	var $dateModification;
 	var $createur;
 	var $dateCreation;
-	var $__DBMetaDataField=array('categorie'=>array('description'=>'Catégorie', 'type'=>10, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_categorie')), 'nom'=>array('description'=>'Nom du fichier', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>50, 'Multi'=>false)), 'description'=>array('description'=>'Description', 'type'=>7, 'notnull'=>true, 'params'=>array()), 'modificateur'=>array('description'=>'Dernier modificateur', 'type'=>10, 'notnull'=>true, 'params'=>array('TableName'=>'CORE_users')), 'dateModification'=>array('description'=>'Date dernier modification', 'type'=>6, 'notnull'=>false, 'params'=>array()), 'createur'=>array('description'=>'Créateur', 'type'=>10, 'notnull'=>true, 'params'=>array('TableName'=>'CORE_users')), 'dateCreation'=>array('description'=>'Date de création', 'type'=>6, 'notnull'=>true, 'params'=>array()));
+	var $__DBMetaDataField=array('categorie'=>array('description'=>'Dossier', 'type'=>10, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_categorie')), 'nom'=>array('description'=>'Nom du fichier', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>50, 'Multi'=>false)), 'description'=>array('description'=>'Description', 'type'=>7, 'notnull'=>true, 'params'=>array()), 'modificateur'=>array('description'=>'Dernier modificateur', 'type'=>10, 'notnull'=>true, 'params'=>array('TableName'=>'CORE_users')), 'dateModification'=>array('description'=>'Date dernier modification', 'type'=>6, 'notnull'=>false, 'params'=>array()), 'createur'=>array('description'=>'Créateur', 'type'=>10, 'notnull'=>true, 'params'=>array('TableName'=>'CORE_users')), 'dateCreation'=>array('description'=>'Date de création', 'type'=>6, 'notnull'=>true, 'params'=>array()));
 
 	var $__toText='$nom';
 }

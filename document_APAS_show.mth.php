@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 08 December 2008 22:41:18 By  ---
+// --- Last modification: Date 04 March 2009 19:31:52 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -35,7 +35,10 @@ require_once('extensions/org_lucterios_documents/document.tbl.php');
 function document_APAS_show(&$self,$posX,$posY,$xfer_result)
 {
 //@CODE_ACTION@
-$path = "usr/org_lucterios_documents";
+global $rootPath;
+if(!isset($rootPath))
+	$rootPath = "";
+$path = $rootPath."usr/org_lucterios_documents";
 $destination_file = $path."/document".$self->id;
 if (!is_file($destination_file)) {
 	require_once "CORE/Lucterios_Error.inc.php";
@@ -54,6 +57,8 @@ $xfer_result->setDBObject($self,"dateCreation",true,$posY++,$posX);
 $down=new Xfer_Comp_DownLoad('docfile');
 $down->compress=true;
 $down->HttpFile=true;
+include_once("CORE/fichierFonctions.inc.php");
+$down->maxsize=taille_max_dl_fichier();
 $down->setValue($self->nom);
 $down->setFileName($destination_file);
 if (!$readonly)
@@ -61,7 +66,7 @@ if (!$readonly)
 $down->setLocation($posX,$posY++,2);
 $xfer_result->addComponent($down);
 $xfer_result->readonly=$readonly;
-
+$xfer_result->m_context['categorie']=$self->categorie;
 return $xfer_result;
 //@CODE_ACTION@
 }

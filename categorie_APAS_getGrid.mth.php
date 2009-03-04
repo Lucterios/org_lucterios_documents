@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 08 December 2008 21:39:54 By  ---
+// --- Last modification: Date 06 February 2009 18:12:15 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -28,13 +28,13 @@ require_once('extensions/org_lucterios_documents/categorie.tbl.php');
 //@TABLES@
 
 //@DESC@getList de categorie
-//@PARAM@ 
+//@PARAM@ Params
 
-function categorie_APAS_getGrid(&$self)
+function categorie_APAS_getGrid(&$self,$Params)
 {
 //@CODE_ACTION@
 $grid = new Xfer_Comp_Grid("categorie");
-$grid->setDBObject($self, 4);
+$grid->setDBObject($self, 5,"",$Params);
 $grid->addAction($self->newAction("_Modifier", "edit.png", "AddModify",FORMTYPE_MODAL,CLOSE_NO, SELECT_SINGLE));
 $grid->addAction($self->newAction("_Supprimer", "suppr.png", "Del", FORMTYPE_MODAL,CLOSE_NO, SELECT_SINGLE));
 $grid->addAction($self->newAction("_Ajouter", "add.png", "AddModify",FORMTYPE_MODAL,CLOSE_NO, SELECT_NONE));

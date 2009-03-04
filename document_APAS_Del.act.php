@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 07 December 2008 23:29:26 By  ---
+// --- Last modification: Date 04 March 2009 19:36:12 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -57,7 +57,10 @@ $xfer_result->m_context['TABLE_NAME']=$self->__table;
 $xfer_result->m_context['RECORD_ID']=$self->id;
 //@CODE_ACTION@
 if($xfer_result->confirme("Etes vous sûre de vouloir supprimer ce document?")) {
-	$path = "usr/org_lucterios_documents";
+	global $rootPath;
+	if(!isset($rootPath))
+		$rootPath = "";
+	$path = $rootPath."usr/org_lucterios_documents";
 	$destination_file = $path."/document".$self->id;
 	$self->delete();
 	if (is_file($destination_file))

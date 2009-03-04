@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 08 December 2008 20:58:20 By  ---
+// --- Last modification: Date 06 February 2009 23:59:09 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -51,14 +51,15 @@ $xfer_result->addComponent($img);
 $lbl=new  Xfer_Comp_LabelForm("titre");
 $lbl->setLocation(1,0);
 $xfer_result->addComponent($lbl);
-$lbl->setValue("{[center]}{[bold]}Liste des catégories{[/bold]}{[/center]}");
+$lbl->setValue("{[center]}{[bold]}Liste des dossiers{[/bold]}{[/center]}");
+$self->orderby("parent,nom");
 $self->find();
-$grid = $self->getGrid("categorie");
+$grid = $self->getGrid($Params);
 $grid->setLocation(0,1,2);
 $xfer_result->addComponent($grid);
 $lbl=new Xfer_Comp_LabelForm("nb");
 $lbl->setLocation(0, 2,2);
-$lbl->setValue("Nombre affichés : ".count($grid->m_records));
+$lbl->setValue("Nombre total : ".$grid->mNbLines);
 $xfer_result->addComponent($lbl);
 $xfer_result->addAction(new Xfer_Action("_Fermer", "close.png"));
 //@CODE_ACTION@

@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 08 December 2008 21:39:46 By  ---
+// --- Last modification: Date 06 February 2009 23:59:30 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -28,7 +28,7 @@ require_once('CORE/groups.tbl.php');
 require_once('extensions/org_lucterios_documents/categorie.tbl.php');
 //@TABLES@
 
-//@DESC@Editer une categorie
+//@DESC@Editer un dossier
 //@PARAM@ posX
 //@PARAM@ posY
 //@PARAM@ xfer_result
@@ -36,8 +36,13 @@ require_once('extensions/org_lucterios_documents/categorie.tbl.php');
 function categorie_APAS_edit(&$self,$posX,$posY,$xfer_result)
 {
 //@CODE_ACTION@
+if ($self->parent==null)
+	$self->parent=0;
 $xfer_result->setDBObject($self,"nom",false,$posY++,$posX);
 $xfer_result->setDBObject($self,"description",false,$posY++,$posX);
+$xfer_result->setDBObject($self,"parent",false,$posY++,$posX);
+$parent=$xfer_result->getComponents("parent");
+$parent->m_select[0]="---";
 
 $lbl=new xfer_comp_LabelForm('labelvisualisation');
 $lbl->setLocation($posX,$posY);
@@ -53,7 +58,7 @@ $sel->setValue($val);
 $select=array();
 $DBGroup=new DBObj_CORE_groups;
 $DBGroup->find();
-while ($DBGroup->fetch()) 
+while ($DBGroup->fetch())
 	$select[$DBGroup->id]=$DBGroup->toText();
 $sel->setSelect($select);
 $xfer_result->addComponent($sel);
@@ -72,7 +77,7 @@ $sel->setValue($val);
 $select=array();
 $DBGroup=new DBObj_CORE_groups;
 $DBGroup->find();
-while ($DBGroup->fetch()) 
+while ($DBGroup->fetch())
 	$select[$DBGroup->id]=$DBGroup->toText();
 $sel->setSelect($select);
 $xfer_result->addComponent($sel);

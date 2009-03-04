@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 08 December 2008 20:57:59 By  ---
+// --- Last modification: Date 06 February 2009 23:14:04 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -28,9 +28,9 @@ require_once('extensions/org_lucterios_documents/categorie.tbl.php');
 //@TABLES@
 
 //@DESC@
-//@PARAM@ 
+//@PARAM@ Folder=0
 
-function categorie_APAS_getVisuList(&$self)
+function categorie_APAS_getVisuList(&$self,$Folder=0)
 {
 //@CODE_ACTION@
 $result=array();
@@ -41,7 +41,9 @@ $Q="SELECT org_lucterios_documents_categorie.*
 FROM org_lucterios_documents_categorie,org_lucterios_documents_visualisation,CORE_users
 WHERE org_lucterios_documents_categorie.id=org_lucterios_documents_visualisation.categorie
 AND org_lucterios_documents_visualisation.groupe=CORE_users.groupId
+AND org_lucterios_documents_categorie.parent=$Folder
 AND CORE_users.id=$LOGIN_ID";
+echo "<!-- Q=$Q -->\n";
 $DBCat->query($Q);
 
 while ($DBCat->fetch())

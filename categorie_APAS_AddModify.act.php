@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 08 December 2008 20:23:04 By  ---
+// --- Last modification: Date 06 February 2009 23:57:24 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -31,7 +31,7 @@ require_once('CORE/xfer_custom.inc.php');
 //@XFER:custom@
 
 
-//@DESC@Ajouter/Modifier une catégorie
+//@DESC@Ajouter/Modifier un dossier
 //@PARAM@ 
 //@INDEX:categorie
 
@@ -47,15 +47,15 @@ if ($categorie>=0) $self->get($categorie);
 $self->lockRecord("categorie_APAS_AddModify");
 try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_documents","categorie_APAS_AddModify",$Params);
-$xfer_result->Caption="Ajouter/Modifier une catégorie";
+$xfer_result->Caption="Ajouter/Modifier un dossier";
 $xfer_result->m_context['ORIGINE']="categorie_APAS_AddModify";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;
 $xfer_result->m_context['RECORD_ID']=$self->id;
 //@CODE_ACTION@
 if ($self->id>0)
-	$xfer_result->Caption="Modifier une catégorie";
+	$xfer_result->Caption="Modifier un dossier";
 else
-	$xfer_result->Caption="Ajouter unz catégorie";
+	$xfer_result->Caption="Ajouter un dossier";
 $img=new Xfer_Comp_Image("img");
 $img->setLocation(0,0,1,2);
 $img->setValue("documentConf.png");

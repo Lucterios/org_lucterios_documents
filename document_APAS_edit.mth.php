@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 08 December 2008 22:50:07 By  ---
+// --- Last modification: Date 07 February 2009 15:19:40 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -52,15 +52,21 @@ if ($self->id>0) {
 	$xfer_result->setDBObject($self,"dateCreation",true,$posY++,$posX);
 }
 
-if ($self->id==0) {
-	$docfile=new Xfer_Comp_UpLoad('docfile');
-	$docfile->compress=true;
-	$docfile->HttpFile=true;
+$docfile=new Xfer_Comp_UpLoad('docfile');
+$docfile->compress=true;
+$docfile->HttpFile=true;
+include_once("CORE/fichierFonctions.inc.php");
+$docfile->maxsize=taille_max_dl_fichier();
+if ($self->id>0) {
+	$docfile->needed=false;
+	$docfile->setValue('Fichier à ré-injecter');
+}
+else {
 	$docfile->needed=true;
 	$docfile->setValue('Fichier à inserer');
-	$docfile->setLocation($posX,$posY++,2);
-	$xfer_result->addComponent($docfile);
 }
+$docfile->setLocation($posX,$posY++,2);
+$xfer_result->addComponent($docfile);
 return $xfer_result;
 //@CODE_ACTION@
 }
