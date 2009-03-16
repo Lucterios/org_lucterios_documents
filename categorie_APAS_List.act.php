@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 06 February 2009 23:59:09 By  ---
+// --- Last modification: Date 16 March 2009 22:54:57 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -31,7 +31,7 @@ require_once('CORE/xfer_custom.inc.php');
 //@XFER:custom@
 
 
-//@DESC@Liste des catégories
+//@DESC@Liste des dossiers
 //@PARAM@ 
 
 
@@ -42,7 +42,7 @@ function categorie_APAS_List($Params)
 $self=new DBObj_org_lucterios_documents_categorie();
 try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_documents","categorie_APAS_List",$Params);
-$xfer_result->Caption="Liste des catégories";
+$xfer_result->Caption="Liste des dossiers";
 //@CODE_ACTION@
 $img=new  Xfer_Comp_Image("img");
 $img->setLocation(0,0);

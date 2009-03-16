@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 04 March 2009 19:36:12 By  ---
+// --- Last modification: Date 16 March 2009 22:54:57 By  ---
 
 $extention_name="org_lucterios_documents";
 $extention_description="Gestion de documents et de fichiers partagés";
@@ -30,7 +30,7 @@ $extension_libre=true;
 $version_max=0;
 $version_min=90;
 $version_release=5;
-$version_build=103;
+$version_build=104;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 0, 93, 0, 90, false);
@@ -53,7 +53,7 @@ $actions=array();
 $actions[0] = new Param_Action("Valider un dossier", "categorie_APAS_AddModifyAct", 3);
 $actions[1] = new Param_Action("Ajouter/Modifier un dossier", "categorie_APAS_AddModify", 3);
 $actions[2] = new Param_Action("Supprimer un dossier", "categorie_APAS_Del", 3);
-$actions[3] = new Param_Action("Liste des catégories", "categorie_APAS_List", 3);
+$actions[3] = new Param_Action("Liste des dossiers", "categorie_APAS_List", 3);
 $actions[4] = new Param_Action("Valider un document", "document_APAS_AddModifyAct", 1);
 $actions[5] = new Param_Action("Ajouter/Modifier un document", "document_APAS_AddModify", 1);
 $actions[6] = new Param_Action("Supprimer un document", "document_APAS_Del", 2);
