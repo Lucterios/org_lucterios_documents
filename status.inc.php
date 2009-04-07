@@ -18,20 +18,20 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 09 December 2008 22:41:13 By  ---
+// --- Last modification: Date 06 April 2009 21:52:38 By  ---
 
 //@BEGIN@
 function org_lucterios_documents_status(&$result)
 {
 	$lab = new Xfer_Comp_LabelForm('documenttitle');
 	$lab->setValue("{[center]}{[italc]}Gestion documentaire{[/italc]}{[/center]}");
-	$lab->setLocation(0,30,2);
+	$lab->setLocation(0,30,4);
 	$result->addComponent($lab);
 	require_once"extensions/org_lucterios_documents/document.tbl.php";
 	$DBdoc = new DBObj_org_lucterios_documents_document;
 	$nb=$DBdoc->find();
 	$lbl_doc = new Xfer_Comp_LabelForm('lbl_nbdocument');
-	$lbl_doc->setLocation(0,31,2);
+	$lbl_doc->setLocation(0,31,4);
 	$pluriel=($nb>1)?'s':'';
 	$lbl_doc->setValue("{[center]}$nb fichier$pluriel actuellement disponible$pluriel{[/center]}");
 	$result->addComponent($lbl_doc);
