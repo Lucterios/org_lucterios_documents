@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 20 August 2009 20:18:09 By  ---
+// --- Last modification: Date 24 August 2009 20:41:54 By  ---
 
 $extention_name="org_lucterios_documents";
 $extention_description="Gestion de documents et de fichiers partagés";
@@ -29,7 +29,7 @@ $extension_libre=true;
 
 $version_max=1;
 $version_min=0;
-$version_release=2;
+$version_release=3;
 $version_build=4;
 
 $depencies=array();
