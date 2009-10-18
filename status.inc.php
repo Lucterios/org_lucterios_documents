@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 06 April 2009 21:52:38 By  ---
+// --- Last modification: Date 15 October 2009 22:54:36 By  ---
 
 //@BEGIN@
 function org_lucterios_documents_status(&$result)
@@ -35,6 +35,16 @@ function org_lucterios_documents_status(&$result)
 	$pluriel=($nb>1)?'s':'';
 	$lbl_doc->setValue("{[center]}$nb fichier$pluriel actuellement disponible$pluriel{[/center]}");
 	$result->addComponent($lbl_doc);
+
+	require_once "CORE/fichierFonctions.inc.php";
+     $remaining_size=getRemainingStorageSize();
+     if ($remaining_size>=0) {
+		$size_value=convert_taille($remaining_size);
+		$lbl_doc = new Xfer_Comp_LabelForm('lbl_remainingsize');
+		$lbl_doc->setLocation(0,32,4);
+		$lbl_doc->setValue("{[center]}{[italic]}Taille de stockage restant : $size_value{[/italic]}{[/center]}");
+		$result->addComponent($lbl_doc);
+	}
 }
 //@END@
 ?>

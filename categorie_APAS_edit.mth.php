@@ -18,13 +18,14 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 06 February 2009 23:59:30 By  ---
+// --- Last modification: Date 17 October 2009 19:58:01 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
 require_once('CORE/groups.tbl.php');
+require_once('CORE/users.tbl.php');
 require_once('extensions/org_lucterios_documents/categorie.tbl.php');
 //@TABLES@
 
@@ -40,20 +41,32 @@ if ($self->parent==null)
 	$self->parent=0;
 $xfer_result->setDBObject($self,"nom",false,$posY++,$posX);
 $xfer_result->setDBObject($self,"description",false,$posY++,$posX);
-$xfer_result->setDBObject($self,"parent",false,$posY++,$posX);
+$xfer_result->setDBObject($self,"parent",($self->id==0),$posY++,$posX);
 $parent=$xfer_result->getComponents("parent");
 $parent->m_select[0]="---";
+
+if ($self->id==0) {
+	global $LOGIN_ID;
+	$DBUser=new DBObj_CORE_users;
+	$DBUser->get($LOGIN_ID);
+	$current_group=$DBUser->groupId;
+}
 
 $lbl=new xfer_comp_LabelForm('labelvisualisation');
 $lbl->setLocation($posX,$posY);
 $lbl->setValue("{[bold]}Groupes de consultation{[/bold]}");
 $xfer_result->addComponent($lbl);
+
 $sel=new Xfer_Comp_CheckList('visualisation');
 $sel->setLocation($posX+1,$posY++);
 $val=array();
-$visu=$self->getfield('visualisation');
-while($visu->fetch())
-	$val[]=$visu->groupe;
+if ($self->id>0) {
+	$visu=$self->getField('visualisation');
+	while($visu->fetch())
+		$val[]=$visu->groupe;
+}
+else
+	$val[]=$current_group;
 $sel->setValue($val);
 $select=array();
 $DBGroup=new DBObj_CORE_groups;
@@ -67,12 +80,17 @@ $lbl=new xfer_comp_LabelForm('labelmodification');
 $lbl->setLocation($posX,$posY);
 $lbl->setValue("{[bold]}Groupes de modification{[/bold]}");
 $xfer_result->addComponent($lbl);
+
 $sel=new Xfer_Comp_CheckList('modification');
 $sel->setLocation($posX+1,$posY++);
 $val=array();
-$modif=$self->getfield('modification');
-while($modif->fetch())
-	$val[]=$modif->groupe;
+if ($self->id>0) {
+	$modif=$self->getField('modification');
+	while($modif->fetch())
+		$val[]=$modif->groupe;
+}
+else
+	$val[]=$current_group;
 $sel->setValue($val);
 $select=array();
 $DBGroup=new DBObj_CORE_groups;

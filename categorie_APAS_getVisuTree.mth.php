@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 14 October 2009 21:16:11 By  ---
+// --- Last modification: Date 15 October 2009 20:37:17 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -27,30 +27,38 @@ require_once('CORE/rights.inc.php');
 require_once('extensions/org_lucterios_documents/categorie.tbl.php');
 //@TABLES@
 
-//@DESC@
-//@PARAM@ Folder=0
+//@DESC@Retour la visualisation sous forme d'arbre
+//@PARAM@ folder=0
 
-function categorie_APAS_getVisuList(&$self,$Folder=0)
+function categorie_APAS_getVisuTree(&$self,$folder=0)
 {
 //@CODE_ACTION@
-$result=array();
-
-global $LOGIN_ID;
+define('ROOT','--/');
+define('SUB' ,'--');
+$tree=array();
+$prefix="";
+if ($folder==0) {
+	$tree[0]="/";
+	$prefix1=ROOT;
+	$prefix2=SUB;
+}
 $DBCat=new DBObj_org_lucterios_documents_categorie;
-$Q="SELECT org_lucterios_documents_categorie.*
-FROM org_lucterios_documents_categorie,org_lucterios_documents_visualisation,CORE_users
-WHERE org_lucterios_documents_categorie.id=org_lucterios_documents_visualisation.categorie
-AND org_lucterios_documents_visualisation.groupe=CORE_users.groupId
-AND org_lucterios_documents_categorie.parent=$Folder
-AND CORE_users.id=$LOGIN_ID
-ORDER BY org_lucterios_documents_categorie.nom";
-//echo "<!-- Q=$Q -->\n";
-$DBCat->query($Q);
-
-while ($DBCat->fetch())
-	$result[$DBCat->id]=$DBCat->toText();
-
-return $result;
+$DBCat->parent=$folder;
+$DBCat->find();
+while ($DBCat->fetch()) {
+	$id=$DBCat->id;
+	$name=$DBCat->nom;
+	$tree[$id]=$prefix1.$name;
+	$sub_tree=$self->getVisuTree($id);
+	foreach($sub_tree as $sub_id=>$value) {
+		if (substr($value,0,3)==ROOT)
+			$value=$prefix2.SUB.$value;
+		else
+			$value=$prefix2.ROOT.$value;
+		$tree[$sub_id]=$value;
+	}
+}
+return $tree;
 //@CODE_ACTION@
 }
 

@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 08 February 2009 13:16:22 By  ---
+// --- Last modification: Date 17 October 2009 20:18:25 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -33,7 +33,7 @@ require_once('CORE/xfer_custom.inc.php');
 
 
 //@DESC@Liste des documents
-//@PARAM@ categorie=0
+//@PARAM@ current_categorie=0
 //@PARAM@ IsSearch=0
 
 
@@ -41,7 +41,7 @@ require_once('CORE/xfer_custom.inc.php');
 
 function document_APAS_List($Params)
 {
-$categorie=getParams($Params,"categorie",0);
+$current_categorie=getParams($Params,"current_categorie",0);
 $IsSearch=getParams($Params,"IsSearch",0);
 $self=new DBObj_org_lucterios_documents_document();
 try {
@@ -67,63 +67,77 @@ if ($IsSearch!=0)
 else {
 	$lbl->setValue("{[center]}{[bold]}Liste des documents{[/bold]}{[/center]}");
 
-	$lbl=new  Xfer_Comp_LabelForm('lblcat');
-	$lbl->setValue("{[bold]}Dossier courant:{[/bold]}");
-	$lbl->setLocation(0,1);
+	$DBcat=new DBObj_org_lucterios_documents_categorie;
+
+	$lbl=new  Xfer_Comp_Button('btnNewFolder');
+	$lbl->setLocation(0,1,1,2);
+	$lbl->setAction($DBcat->NewAction('','newFolder.png','Add',FORMTYPE_MODAL,CLOSE_NO));
 	$xfer_result->addComponent($lbl);
 
-	$DBcat=new DBObj_org_lucterios_documents_categorie;
-	$DBcat->get($categorie);
+	if ($current_categorie>0) {
+		$lbl=new  Xfer_Comp_Button('btnEditFolder');
+		$lbl->setLocation(1,1,1,2);
+		$lbl->setAction($DBcat->NewAction('','folder.gif','AddModify',FORMTYPE_MODAL,CLOSE_NO));
+		$xfer_result->addComponent($lbl);
+	}
+
+	$lbl=new  Xfer_Comp_LabelForm('lblcat');
+	$lbl->setValue("{[bold]}Dossier courant:{[/bold]}");
+	$lbl->setLocation(2,2);
+	$xfer_result->addComponent($lbl);
+
+	$DBcat->get($current_categorie);
 	$readonly=$DBcat->readonly();
 	$list_folders=array();
-	if ($categorie>0)
+	if ($current_categorie>0)
 		$list_folders[$DBcat->parent]="..";
 
 	$lbl=new  Xfer_Comp_LabelForm('lbltitlecat');
-	if ($categorie>0)
+	if ($current_categorie>0)
 		$lbl->setValue($DBcat->getTitle());
 	else
 		$lbl->setValue('>');
-	$lbl->setLocation(1,1,2);
+	$lbl->setLocation(3,2);
 	$xfer_result->addComponent($lbl);
+	$DBcat_description=$DBcat->description;
 
-	$lbl=new  Xfer_Comp_LabelForm('lbldesc');
-	$lbl->setValue("{[center]}{[italic]}".$DBcat->description."{[/italic]}{[/center]}");
-	$lbl->setLocation(3,1);
-	$xfer_result->addComponent($lbl);
+	$grid_x=3;
 
-	$grid_x=2;
 	$DBcat=new DBObj_org_lucterios_documents_categorie;
-	$list=$DBcat->getVisuList((int)$categorie);
+	$list=$DBcat->getVisuList((int)$current_categorie);
 	foreach($list as $id=>$name)
 		$list_folders[$id]=$name;
-	$lbl=new Xfer_Comp_CheckList('categorie');
+	$lbl=new Xfer_Comp_CheckList('current_categorie');
 	$lbl->simple=true;
 	$lbl->setSelect($list_folders);
 	$lbl->setLocation(0,3,$grid_x);
-	$lbl->setSize(100,50);
 	$lbl->setAction($self->NewAction('','','List',FORMTYPE_REFRESH,CLOSE_NO));
 	$xfer_result->addComponent($lbl);
 
-	$lbl=new  Xfer_Comp_Button('btnConfig');
-	$lbl->setLocation(0,4,$grid_x);
-	$lbl->setAction($DBcat->NewAction('_Dossiers...','','List',FORMTYPE_MODAL,CLOSE_NO));
+	//-------------
+
+	$lbl=new  Xfer_Comp_LabelForm('lbldesc');
+	$lbl->setValue("{[center]}{[italic]}$DBcat_description{[/italic]}{[/center]}");
+	$lbl->setLocation(4,2);
 	$xfer_result->addComponent($lbl);
 
-	$self->categorie=$categorie;
+	$self->categorie=$current_categorie;
+	$self->orderBy("nom");
 	$self->find();
 }
 $grid = $self->getGrid($IsSearch,$readonly,$Params);
-$grid->setLocation($grid_x,3,4-$grid_x);
+$grid->setLocation($grid_x,3,5-$grid_x);
 $xfer_result->addComponent($grid);
+
 $lbl=new Xfer_Comp_LabelForm("nb");
-$lbl->setLocation($grid_x,4,4-$grid_x);
+$lbl->setLocation($grid_x,4,5-$grid_x);
 $lbl->setValue("Nombre total : ".$grid->mNbLines);
 $xfer_result->addComponent($lbl);
+
 if ($IsSearch!=0)
 	$xfer_result->addAction($self->NewAction("Nouvelle _Recherche","search.png","Search",FORMTYPE_MODAL,CLOSE_YES));
 $xfer_result->addAction(new Xfer_Action("_Fermer", "close.png"));
-$xfer_result->m_context['current_categorie']=$categorie;
+$xfer_result->m_context['categorie']=$current_categorie;
 //@CODE_ACTION@
 }catch(Exception $e) {
 	throw $e;

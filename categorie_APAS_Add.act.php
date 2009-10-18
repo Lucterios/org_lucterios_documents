@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 15 October 2009 21:52:00 By  ---
+// --- Last modification: Date 17 October 2009 19:48:39 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -26,46 +26,30 @@ require_once('CORE/rights.inc.php');
 //@TABLES@
 require_once('extensions/org_lucterios_documents/categorie.tbl.php');
 //@TABLES@
-//@XFER:custom
-require_once('CORE/xfer_custom.inc.php');
-//@XFER:custom@
+//@XFER:acknowledge
+require_once('CORE/xfer.inc.php');
+//@XFER:acknowledge@
 
 
-//@DESC@Liste des dossiers
+//@DESC@
 //@PARAM@ 
+//@INDEX:categorie
 
 
 //@LOCK:0
 
-function categorie_APAS_List($Params)
+function categorie_APAS_Add($Params)
 {
 $self=new DBObj_org_lucterios_documents_categorie();
+$categorie=getParams($Params,"categorie",-1);
+if ($categorie>=0) $self->get($categorie);
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_documents","categorie_APAS_List",$Params);
-$xfer_result->Caption="Liste des dossiers";
+$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_documents","categorie_APAS_Add",$Params);
+$xfer_result->Caption="";
 //@CODE_ACTION@
-$img=new  Xfer_Comp_Image("img");
-$img->setLocation(0,0);
-$img->setValue("documentConf.png");
-$xfer_result->addComponent($img);
-
-$lbl=new  Xfer_Comp_LabelForm("titre");
-$lbl->setLocation(1,0,4);
-$lbl->setValue("{[center]}{[bold]}Liste des dossiers{[/bold]}{[/center]}");
-$xfer_result->addComponent($lbl);
-
-$self->orderby("parent,nom");
-$self->find();
-$grid = $self->getGrid($Params);
-$grid->setLocation(0,2,2);
-$xfer_result->addComponent($grid);
-
-$lbl=new Xfer_Comp_LabelForm("nb");
-$lbl->setLocation(0,3,2);
-$lbl->setValue("Nombre total : ".$grid->mNbLines);
-$xfer_result->addComponent($lbl);
-
-$xfer_result->addAction(new Xfer_Action("_Fermer", "close.png"));
+$xfer_result->m_context['parent']=$categorie;
+unset($xfer_result->m_context['categorie']);
+$xfer_result->redirectAction($self->NewAction('','','AddModify',FORMTYPE_MODAL,CLOSE_YES));
 //@CODE_ACTION@
 }catch(Exception $e) {
 	throw $e;
