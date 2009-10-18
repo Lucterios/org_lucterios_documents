@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 15 October 2009 22:54:36 By  ---
+// --- Last modification: Date 18 October 2009 15:24:23 By  ---
 
 //@BEGIN@
 function org_lucterios_documents_status(&$result)
@@ -38,11 +38,12 @@ function org_lucterios_documents_status(&$result)
 
 	require_once "CORE/fichierFonctions.inc.php";
      $remaining_size=getRemainingStorageSize();
-     if ($remaining_size>=0) {
-		$size_value=convert_taille($remaining_size);
+     if (is_array($remaining_size)) {
+		$size_value=convert_taille($remaining_size[0]);
+		$max_size=convert_taille($remaining_size[1]);
 		$lbl_doc = new Xfer_Comp_LabelForm('lbl_remainingsize');
 		$lbl_doc->setLocation(0,32,4);
-		$lbl_doc->setValue("{[center]}{[italic]}Taille de stockage restant : $size_value{[/italic]}{[/center]}");
+		$lbl_doc->setValue("{[center]}{[italic]}Taille de stockage: restant $size_value sur $max_size{[/italic]}{[/center]}");
 		$result->addComponent($lbl_doc);
 	}
 }
