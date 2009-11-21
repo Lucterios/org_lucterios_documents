@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 08 February 2009 12:58:50 By  ---
+// --- Last modification: Date 21 November 2009 13:53:46 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -32,7 +32,7 @@ require_once('CORE/xfer_custom.inc.php');
 
 
 //@DESC@Ajouter/Modifier un document
-//@PARAM@ current_categorie
+//@PARAM@ 
 //@INDEX:document
 
 
@@ -40,9 +40,6 @@ require_once('CORE/xfer_custom.inc.php');
 
 function document_APAS_AddModify($Params)
 {
-if (($ret=checkParams("org_lucterios_documents", "document_APAS_AddModify",$Params ,"current_categorie"))!=null)
-	return $ret;
-$current_categorie=getParams($Params,"current_categorie",0);
 $self=new DBObj_org_lucterios_documents_document();
 $document=getParams($Params,"document",-1);
 if ($document>=0) $self->get($document);
@@ -64,8 +61,6 @@ $img->setLocation(0,0,1,5);
 $img->setValue("document.png");
 $xfer_result->addComponent($img);
 $self->setFrom($Params);
-if ($self->id==0)
-	$self->categorie=$current_categorie;
 $xfer_result=$self->edit(1,0,$xfer_result);
 $xfer_result->addAction($self->newAction("_Ok", "ok.png", "AddModifyAct",FORMTYPE_MODAL,CLOSE_YES));
 $xfer_result->addAction(new Xfer_Action("_Annuler", "cancel.png"));
