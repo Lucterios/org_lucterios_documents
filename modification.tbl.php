@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // table file write by SDK tool
-// --- Last modification: Date 08 December 2008 21:42:39 By  ---
+// --- Last modification: Date 07 January 2010 0:01:15 By  ---
 
 require_once('CORE/DBObject.inc.php');
 
@@ -36,7 +36,7 @@ class DBObj_org_lucterios_documents_modification extends DBObj_Basic
 
 	var $categorie;
 	var $groupe;
-	var $__DBMetaDataField=array('categorie'=>array('description'=>'Catégorie', 'type'=>10, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_categorie')), 'groupe'=>array('description'=>'Groupe', 'type'=>10, 'notnull'=>false, 'params'=>array('TableName'=>'CORE_groups')));
+	var $__DBMetaDataField=array('categorie'=>array('description'=>'Catégorie', 'type'=>10, 'notnull'=>true, 'params'=>array('TableName'=>'org_lucterios_documents_categorie')), 'groupe'=>array('description'=>'Groupe', 'type'=>10, 'notnull'=>true, 'params'=>array('TableName'=>'CORE_groups')));
 
 	var $__toText='$groupe';
 }
