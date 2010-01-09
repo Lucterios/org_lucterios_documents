@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 14 October 2009 21:16:11 By  ---
+// --- Last modification: Date 09 January 2010 14:28:48 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -41,9 +41,12 @@ $Q="SELECT org_lucterios_documents_categorie.*
 FROM org_lucterios_documents_categorie,org_lucterios_documents_visualisation,CORE_users
 WHERE org_lucterios_documents_categorie.id=org_lucterios_documents_visualisation.categorie
 AND org_lucterios_documents_visualisation.groupe=CORE_users.groupId
-AND org_lucterios_documents_categorie.parent=$Folder
-AND CORE_users.id=$LOGIN_ID
-ORDER BY org_lucterios_documents_categorie.nom";
+AND CORE_users.id=$LOGIN_ID";
+if ($Folder>0)
+	$Q.=" AND org_lucterios_documents_categorie.parent=$Folder";
+else
+	$Q.=" AND org_lucterios_documents_categorie.parent IS NULL";
+$Q.=" ORDER BY org_lucterios_documents_categorie.nom";
 //echo "<!-- Q=$Q -->\n";
 $DBCat->query($Q);
 

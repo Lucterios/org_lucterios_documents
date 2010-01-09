@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 17 October 2009 20:18:25 By  ---
+// --- Last modification: Date 09 January 2010 14:29:31 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -121,8 +121,11 @@ else {
 	$lbl->setLocation(4,2);
 	$xfer_result->addComponent($lbl);
 
-	$self->categorie=$current_categorie;
-	$self->orderBy("nom");
+	if ($current_categorie>0)
+		$self->whereAdd("org_lucterios_documents_document.categorie=$current_categorie");
+	else
+		$self->whereAdd('org_lucterios_documents_document.categorie IS NULL');
+	$self->orderBy("org_lucterios_documents_document.nom");
 	$self->find();
 }
 $grid = $self->getGrid($IsSearch,$readonly,$Params);
