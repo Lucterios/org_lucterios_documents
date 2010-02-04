@@ -18,20 +18,20 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 18 October 2009 15:24:23 By  ---
+// --- Last modification: Date 03 February 2010 9:08:26 By  ---
 
 //@BEGIN@
 function org_lucterios_documents_status(&$result)
 {
 	$lab = new Xfer_Comp_LabelForm('documenttitle');
-	$lab->setValue("{[center]}{[italc]}Gestion documentaire{[/italc]}{[/center]}");
-	$lab->setLocation(0,30,4);
+	$lab->setValue('{[center]}{[bold]}{[underline]}Gestion documentaire{[/underline]}{[/bold]}{[/center]}');
+	$lab->setLocation(0,70,4);
 	$result->addComponent($lab);
 	require_once"extensions/org_lucterios_documents/document.tbl.php";
 	$DBdoc = new DBObj_org_lucterios_documents_document;
 	$nb=$DBdoc->find();
 	$lbl_doc = new Xfer_Comp_LabelForm('lbl_nbdocument');
-	$lbl_doc->setLocation(0,31,4);
+	$lbl_doc->setLocation(0,71,4);
 	$pluriel=($nb>1)?'s':'';
 	$lbl_doc->setValue("{[center]}$nb fichier$pluriel actuellement disponible$pluriel{[/center]}");
 	$result->addComponent($lbl_doc);
@@ -42,10 +42,14 @@ function org_lucterios_documents_status(&$result)
 		$size_value=convert_taille($remaining_size[0]);
 		$max_size=convert_taille($remaining_size[1]);
 		$lbl_doc = new Xfer_Comp_LabelForm('lbl_remainingsize');
-		$lbl_doc->setLocation(0,32,4);
+		$lbl_doc->setLocation(0,72,4);
 		$lbl_doc->setValue("{[center]}{[italic]}Taille de stockage: restant $size_value sur $max_size{[/italic]}{[/center]}");
 		$result->addComponent($lbl_doc);
 	}
+	$lab = new Xfer_Comp_LabelForm('documentend');
+	$lab->setValue('{[center]}{[hr/]}{[/center]}');
+	$lab->setLocation(0,73,4);
+	$result->addComponent($lab);
 }
 //@END@
 ?>
