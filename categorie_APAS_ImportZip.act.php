@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 18 February 2010 23:56:32 By  ---
+// --- Last modification: Date 18 February 2010 23:06:38 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -26,46 +26,48 @@ require_once('CORE/rights.inc.php');
 //@TABLES@
 require_once('extensions/org_lucterios_documents/categorie.tbl.php');
 //@TABLES@
-//@XFER:acknowledge
-require_once('CORE/xfer.inc.php');
-//@XFER:acknowledge@
+//@XFER:custom
+require_once('CORE/xfer_custom.inc.php');
+//@XFER:custom@
 
 
-//@DESC@Supprimer un dossier
+//@DESC@Import multiple depuis un fichier zip
 //@PARAM@ 
-//@INDEX:categorie
 
-//@TRANSACTION:
 
-//@LOCK:2
+//@LOCK:0
 
-function categorie_APAS_Del($Params)
+function categorie_APAS_ImportZip($Params)
 {
 $self=new DBObj_org_lucterios_documents_categorie();
-$categorie=getParams($Params,"categorie",-1);
-if ($categorie>=0) $self->get($categorie);
-
-$self->lockRecord("categorie_APAS_Del");
-
-global $connect;
-$connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_documents","categorie_APAS_Del",$Params);
-$xfer_result->Caption="Supprimer un dossier";
-$xfer_result->m_context['ORIGINE']="categorie_APAS_Del";
-$xfer_result->m_context['TABLE_NAME']=$self->__table;
-$xfer_result->m_context['RECORD_ID']=$self->id;
+$xfer_result=&new Xfer_Container_Custom("org_lucterios_documents","categorie_APAS_ImportZip",$Params);
+$xfer_result->Caption="Import multiple depuis un fichier zip";
 //@CODE_ACTION@
-if($self->canBeDelete()!=0)
-	$xfer_result->message("Suppression impossible: ce dossier est utilisée!");
-else if($xfer_result->confirme("Etes vous sûre de vouloir supprimer ce dossier?{[newline]}{[italic]}{[bold]}Attention:{[/bold]}Tous les fichiers et sous-dossiers seront également supprimer.{[/italic]}"))
-	$self->deleteCascade();
+$img=new Xfer_Comp_Image("img");
+$img->setLocation(0,0,1,2);
+$img->setValue("documentConf.png");
+$xfer_result->addComponent($img);
+
+$zipfile=new Xfer_Comp_UpLoad('zipfile');
+$zipfile->compress=false;
+$zipfile->HttpFile=true;
+include_once("CORE/fichierFonctions.inc.php");
+$zipfile->maxsize=taille_max_dl_fichier();
+$zipfile->needed=true;
+$zipfile->setValue('Fichier zip à inserer');
+$zipfile->addFilter('zip');
+$zipfile->addFilter('ZIP');
+$zipfile->setLocation(1,1,2);
+$xfer_result->addComponent($zipfile);
+
+$self->parent=0;
+$xfer_result=$self->fillParentAndRights(1, 2, $xfer_result);
+
+$xfer_result->addAction($self->newAction("_Ok", "ok.png", "ImportZipAct",FORMTYPE_MODAL,CLOSE_YES));
+$xfer_result->addAction(new Xfer_Action("_Annuler", "cancel.png"));
 //@CODE_ACTION@
-	$xfer_result->setCloseAction(new Xfer_Action('unlock','','CORE','UNLOCK',FORMTYPE_MODAL,CLOSE_YES,SELECT_NONE));
-	$connect->commit();
 }catch(Exception $e) {
-	$connect->rollback();
-	$self->unlockRecord("categorie_APAS_Del");
 	throw $e;
 }
 return $xfer_result;

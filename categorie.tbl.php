@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // table file write by SDK tool
-// --- Last modification: Date 07 January 2010 0:00:04 By  ---
+// --- Last modification: Date 18 February 2010 23:53:07 By  ---
 
 require_once('CORE/DBObject.inc.php');
 
@@ -39,7 +39,9 @@ class DBObj_org_lucterios_documents_categorie extends DBObj_Basic
 	var $parent;
 	var $visualisation;
 	var $modification;
-	var $__DBMetaDataField=array('nom'=>array('description'=>'Nom', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>50, 'Multi'=>false)), 'description'=>array('description'=>'Description', 'type'=>7, 'notnull'=>false, 'params'=>array()), 'parent'=>array('description'=>'Dossier Parent', 'type'=>10, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_categorie')), 'visualisation'=>array('description'=>'Groupes de consultation', 'type'=>9, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_visualisation', 'RefField'=>'categorie')), 'modification'=>array('description'=>'Groupes de modification', 'type'=>9, 'notnull'=>true, 'params'=>array('TableName'=>'org_lucterios_documents_modification', 'RefField'=>'categorie')));
+	var $files;
+	var $folders;
+	var $__DBMetaDataField=array('nom'=>array('description'=>'Nom', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>50, 'Multi'=>false)), 'description'=>array('description'=>'Description', 'type'=>7, 'notnull'=>false, 'params'=>array()), 'parent'=>array('description'=>'Dossier Parent', 'type'=>10, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_categorie')), 'visualisation'=>array('description'=>'Groupes de consultation', 'type'=>9, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_visualisation', 'RefField'=>'categorie')), 'modification'=>array('description'=>'Groupes de modification', 'type'=>9, 'notnull'=>true, 'params'=>array('TableName'=>'org_lucterios_documents_modification', 'RefField'=>'categorie')), 'files'=>array('description'=>'Fichiers', 'type'=>9, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_document', 'RefField'=>'categorie')), 'folders'=>array('description'=>'Sous-dossiers', 'type'=>9, 'notnull'=>false, 'params'=>array('TableName'=>'org_lucterios_documents_categorie', 'RefField'=>'parent')));
 
 	var $__toText='$nom';
 }

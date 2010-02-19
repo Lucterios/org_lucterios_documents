@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 03 February 2010 9:08:26 By  ---
+// --- Last modification: Date 18 February 2010 23:56:32 By  ---
 
 $extention_name="org_lucterios_documents";
 $extention_description="Gestion de documents et de fichiers partagés";
@@ -30,7 +30,7 @@ $extension_libre=true;
 $version_max=1;
 $version_min=1;
 $version_release=2;
-$version_build=97;
+$version_build=143;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 2, 1, 1, false);
@@ -54,13 +54,15 @@ $actions[0] = new Param_Action("Valider un dossier", "categorie_APAS_AddModifyAc
 $actions[1] = new Param_Action("Ajouter/Modifier un dossier", "categorie_APAS_AddModify", 3);
 $actions[2] = new Param_Action("", "categorie_APAS_Add", 1);
 $actions[3] = new Param_Action("Supprimer un dossier", "categorie_APAS_Del", 3);
-$actions[4] = new Param_Action("Liste des dossiers", "categorie_APAS_List", 3);
-$actions[5] = new Param_Action("Valider un document", "document_APAS_AddModifyAct", 1);
-$actions[6] = new Param_Action("Ajouter/Modifier un document", "document_APAS_AddModify", 1);
-$actions[7] = new Param_Action("Supprimer un document", "document_APAS_Del", 2);
-$actions[8] = new Param_Action("Fiche d'un document", "document_APAS_Fiche", 0);
-$actions[9] = new Param_Action("Liste des documents", "document_APAS_List", 0);
-$actions[10] = new Param_Action("Rechercher un document", "document_APAS_Search", 0);
+$actions[4] = new Param_Action("Import multiple depuis un fichier zip", "categorie_APAS_ImportZipAct", 3);
+$actions[5] = new Param_Action("Import multiple depuis un fichier zip", "categorie_APAS_ImportZip", 3);
+$actions[6] = new Param_Action("Liste des dossiers", "categorie_APAS_List", 3);
+$actions[7] = new Param_Action("Valider un document", "document_APAS_AddModifyAct", 1);
+$actions[8] = new Param_Action("Ajouter/Modifier un document", "document_APAS_AddModify", 1);
+$actions[9] = new Param_Action("Supprimer un document", "document_APAS_Del", 2);
+$actions[10] = new Param_Action("Fiche d'un document", "document_APAS_Fiche", 0);
+$actions[11] = new Param_Action("Liste des documents", "document_APAS_List", 0);
+$actions[12] = new Param_Action("Rechercher un document", "document_APAS_Search", 0);
 
 $params=array();
 

@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 06 February 2009 18:12:15 By  ---
+// --- Last modification: Date 18 February 2010 22:47:37 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -38,6 +38,7 @@ $grid->setDBObject($self, 5,"",$Params);
 $grid->addAction($self->newAction("_Modifier", "edit.png", "AddModify",FORMTYPE_MODAL,CLOSE_NO, SELECT_SINGLE));
 $grid->addAction($self->newAction("_Supprimer", "suppr.png", "Del", FORMTYPE_MODAL,CLOSE_NO, SELECT_SINGLE));
 $grid->addAction($self->newAction("_Ajouter", "add.png", "AddModify",FORMTYPE_MODAL,CLOSE_NO, SELECT_NONE));
+$grid->addAction($self->newAction("_Import", "zip.png", "ImportZip",FORMTYPE_MODAL,CLOSE_NO, SELECT_NONE));
 $grid->setSize(200,750);
 return $grid;
 //@CODE_ACTION@

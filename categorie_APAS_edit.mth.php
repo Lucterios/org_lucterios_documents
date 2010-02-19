@@ -18,14 +18,12 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 17 October 2009 19:58:01 By  ---
+// --- Last modification: Date 18 February 2010 22:37:29 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
-require_once('CORE/groups.tbl.php');
-require_once('CORE/users.tbl.php');
 require_once('extensions/org_lucterios_documents/categorie.tbl.php');
 //@TABLES@
 
@@ -41,64 +39,8 @@ if ($self->parent==null)
 	$self->parent=0;
 $xfer_result->setDBObject($self,"nom",false,$posY++,$posX);
 $xfer_result->setDBObject($self,"description",false,$posY++,$posX);
-$xfer_result->setDBObject($self,"parent",($self->id==0),$posY++,$posX);
-$parent=$xfer_result->getComponents("parent");
-$parent->m_select[0]="---";
 
-if ($self->id==0) {
-	global $LOGIN_ID;
-	$DBUser=new DBObj_CORE_users;
-	$DBUser->get($LOGIN_ID);
-	$current_group=$DBUser->groupId;
-}
-
-$lbl=new xfer_comp_LabelForm('labelvisualisation');
-$lbl->setLocation($posX,$posY);
-$lbl->setValue("{[bold]}Groupes de consultation{[/bold]}");
-$xfer_result->addComponent($lbl);
-
-$sel=new Xfer_Comp_CheckList('visualisation');
-$sel->setLocation($posX+1,$posY++);
-$val=array();
-if ($self->id>0) {
-	$visu=$self->getField('visualisation');
-	while($visu->fetch())
-		$val[]=$visu->groupe;
-}
-else
-	$val[]=$current_group;
-$sel->setValue($val);
-$select=array();
-$DBGroup=new DBObj_CORE_groups;
-$DBGroup->find();
-while ($DBGroup->fetch())
-	$select[$DBGroup->id]=$DBGroup->toText();
-$sel->setSelect($select);
-$xfer_result->addComponent($sel);
-
-$lbl=new xfer_comp_LabelForm('labelmodification');
-$lbl->setLocation($posX,$posY);
-$lbl->setValue("{[bold]}Groupes de modification{[/bold]}");
-$xfer_result->addComponent($lbl);
-
-$sel=new Xfer_Comp_CheckList('modification');
-$sel->setLocation($posX+1,$posY++);
-$val=array();
-if ($self->id>0) {
-	$modif=$self->getField('modification');
-	while($modif->fetch())
-		$val[]=$modif->groupe;
-}
-else
-	$val[]=$current_group;
-$sel->setValue($val);
-$select=array();
-$DBGroup=new DBObj_CORE_groups;
-$DBGroup->find();
-while ($DBGroup->fetch())
-	$select[$DBGroup->id]=$DBGroup->toText();
-$sel->setSelect($select);
-$xfer_result->addComponent($sel);
+$xfer_result=$self->fillParentAndRights($posX, $posY, $xfer_result);
 
 return $xfer_result;
 //@CODE_ACTION@
