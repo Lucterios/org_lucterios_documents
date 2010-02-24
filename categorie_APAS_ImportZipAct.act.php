@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 18 February 2010 23:49:32 By  ---
+// --- Last modification: Date 23 February 2010 11:48:03 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -78,11 +78,12 @@ if (array_key_exists('zipfile',$Params)) {
 
 	try {
 		$zip = new ZipArchive;
-	     if ($zip->open($destination_file)===true) 	{
+	     	if ($zip->open($destination_file)===true) {
 			$zip->extractTo($destination_zip_path);
 			$zip->close();
-			$self->importDirectory($destination_zip_path,$modification, $visualisation);
-     	}
+			List($nbDir,$nbFile)=$self->importDirectory($destination_zip_path,$modification, $visualisation);
+			$xfer_result->message("{[italic]}Import terminé{[/italic]}{[newline]} - $nbDir dossier(s) créé(s).{[newline]} - $nbFile fichier(s) importée(s).");
+     		}
 		@unlink($destination_file);
 		deleteDir($destination_zip_path);
 	} catch(Exception $e) {
