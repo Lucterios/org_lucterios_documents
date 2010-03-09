@@ -8,3 +8,7 @@ A chaque dossier, vous lui associez un ensemble de <a href='~CORE$groupes'>group
 En associant judicieusement un dossier comme sous-dossier d'un parent, vous pouvez vous définir une arborescence de classement.<br>
 Seuls les <a href='~CORE$utilisateurs'>utilisateurs</a> appartenant aux groupes de visualisation pourront consulter les documents de cette catégorie.<br>
 Seuls les <a href='~CORE$utilisateurs'>utilisateurs</a> appartenant aux groupes de modification pourront corriger les documents de cette catégorie.<br>
+<br>
+Pour vous aider dans la migration d'historique, il vous est possible d'insérer l'ensemble des documents contenus dans un fichier 'zip'.
+Vous devez seulement présiser le dossier dans lequels vous souhaitez réaliser votre import ainsi que les droits à associer à de nouveau sous-dossier.
+L'import respectera l'arborscence contenu dans le zip et ignorera les documents existants.<br>

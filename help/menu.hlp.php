@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // help file write by SDK tool
-// --- Last modification: Date 04 November 2009 0:14:28 By  ---
+// --- Last modification: Date 08 March 2010 19:55:18 By  ---
 
 $HelpTitle='La gestion documentaire';
 $HelpPosition=750;
