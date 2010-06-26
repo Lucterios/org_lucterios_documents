@@ -4,8 +4,10 @@ Dans le menu <i>Administration/Extensions (conf)</i> vous avez à votre dispositi
 Dans cette écran vous avez la possibilité de créer ou de modifier des dossiers de classement documentaire.
 <br>
 <center><img src='~org_lucterios_documents$CategorieDocuments.jpg' alt='CategorieDocuments.jpg' /></center><br>
-A chaque dossier, vous lui associez un ensemble de <a href='~CORE$groupes'>groupe de droits</a> pour la visualisation et la modification des fichiers.<br>
 En associant judicieusement un dossier comme sous-dossier d'un parent, vous pouvez vous définir une arborescence de classement.<br>
+<br>
+A chaque dossier, vous lui associez un ensemble de <a href='~CORE$groupes'>groupe de droits</a> pour la visualisation et la modification des fichiers.<br>
+Pour en sélectionner plusieurs, maintenez la touche "Ctrl" appuyé en même temps que cliquer sur les groupes désirés.<br>
 Seuls les <a href='~CORE$utilisateurs'>utilisateurs</a> appartenant aux groupes de visualisation pourront consulter les documents de cette catégorie.<br>
 Seuls les <a href='~CORE$utilisateurs'>utilisateurs</a> appartenant aux groupes de modification pourront corriger les documents de cette catégorie.<br>
 <br>
