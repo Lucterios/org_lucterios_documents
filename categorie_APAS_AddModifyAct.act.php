@@ -68,7 +68,7 @@ else
 global $connect;
 
 $connect->execute('DELETE FROM org_lucterios_documents_visualisation WHERE categorie='.$self->id,true);
-$visu_list=split(';',$visualisation);
+$visu_list=explode(';',$visualisation);
 foreach($visu_list as $visu_item) {
 	$DBVisu=new DBObj_org_lucterios_documents_visualisation;
 	$DBVisu->categorie=$self->id;
@@ -77,7 +77,7 @@ foreach($visu_list as $visu_item) {
 }
 
 $connect->execute('DELETE FROM org_lucterios_documents_modification WHERE categorie='.$self->id,true);
-$modif_list=split(';',$modification);
+$modif_list=explode(';',$modification);
 foreach($modif_list as $modif_item) {
 	$DBVisu=new DBObj_org_lucterios_documents_modification;
 	$DBVisu->categorie=$self->id;

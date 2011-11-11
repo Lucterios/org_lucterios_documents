@@ -18,7 +18,7 @@
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 // setup file write by SDK tool
-// --- Last modification: Date 29 August 2011 23:24:01 By  ---
+// --- Last modification: Date 10 November 2011 20:43:49 By  ---
 
 $extention_name="org_lucterios_documents";
 $extention_description="Gestion de documents et de fichiers partagés";
@@ -28,12 +28,12 @@ $extention_titre="Gestion documentaires";
 $extension_libre=true;
 
 $version_max=1;
-$version_min=2;
-$version_release=5;
-$version_build=159;
+$version_min=3;
+$version_release=1;
+$version_build=161;
 
 $depencies=array();
-$depencies[0] = new Param_Depencies("CORE", 1, 2, 1, 2, false);
+$depencies[0] = new Param_Depencies("CORE", 1, 3, 1, 3, false);
 
 $rights=array();
 $rights[0] = new Param_Rigth("Visualisation",0);
@@ -71,5 +71,6 @@ $extend_tables["categorie"] = array("org_lucterios_documents.categorie","",array
 $extend_tables["document"] = array("org_lucterios_documents.document","",array("org_lucterios_documents_categorie"=>"categorie","CORE_users"=>"createur",));
 $extend_tables["modification"] = array("org_lucterios_documents.modification","",array("org_lucterios_documents_categorie"=>"categorie","CORE_groups"=>"groupe",));
 $extend_tables["visualisation"] = array("org_lucterios_documents.visualisation","",array("org_lucterios_documents_categorie"=>"categorie","CORE_groups"=>"groupe",));
+$signals=array();
 
 ?>

@@ -21,7 +21,7 @@
 // --- Last modification: Date 03 February 2010 9:08:26 By  ---
 
 //@BEGIN@
-function org_lucterios_documents_status(&$result)
+function org_lucterios_documents_APAS_status(&$result)
 {
 	$lab = new Xfer_Comp_LabelForm('documenttitle');
 	$lab->setValue('{[center]}{[bold]}{[underline]}Gestion documentaire{[/underline]}{[/bold]}{[/center]}');

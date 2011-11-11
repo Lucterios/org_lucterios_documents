@@ -61,7 +61,9 @@ if ($IsSearch!=0)
 	global $LOGIN_ID;
 	$self->setForSearch($Params,'categorie',"org_lucterios_documents_document.categorie=org_lucterios_documents_visualisation.categorie AND
  org_lucterios_documents_visualisation.Groupe=CORE_users.groupId AND CORE_users.id=$LOGIN_ID",array('org_lucterios_documents_visualisation','CORE_users'));
-	$lbl->setValue("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[/center]}");
+
+	include_once("CORE/DBFind.inc.php");
+	$lbl->setValue("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[newline]}{[newline]}".DBFind::getCriteriaText($self,$Params)."{[/center]}");
 	$grid_x=0;
 }
 else {

@@ -47,7 +47,6 @@ if ($Folder>0)
 else
 	$Q.=" AND org_lucterios_documents_categorie.parent IS NULL";
 $Q.=" ORDER BY org_lucterios_documents_categorie.nom";
-//echo "<!-- Q=$Q -->\n";
 $DBCat->query($Q);
 
 while ($DBCat->fetch())

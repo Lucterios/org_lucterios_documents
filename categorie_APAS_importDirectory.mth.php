@@ -53,7 +53,7 @@ if ($name!='') {
 		$NewCat->description='';
 		$NewCat->parent=$self->id;
 		$NewCat->insert();
-		$visu_list=split(';',$visualisation);
+		$visu_list=explode(';',$visualisation);
 		foreach($visu_list as $visu_item) {
 			$visu_item=(int)$visu_item;
 			if ($visu_item>0) {
@@ -63,7 +63,7 @@ if ($name!='') {
 				$DBVisu->insert();
 			}
 		}
-		$modif_list=split(';',$modification);
+		$modif_list=explode(';',$modification);
 		foreach($modif_list as $modif_item) {
 			$modif_item=(int)$modif_item;
 			if ($modif_item>0) {
