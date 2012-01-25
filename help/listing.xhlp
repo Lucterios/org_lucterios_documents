@@ -1,7 +1,7 @@
 <h1>Liste des documents</h1>
 Le menu <i>Bureautique/Gestion documentaire/Liste des documents</i> vous permet de consulter la liste des fichiers que vous avez déjà enregistrés.
 Pour vous aider à retrouver vos documents, la liste est classifiée par un ensemble de dossiers et sous-dossiers et une description vous donne un petit résumé.<br>
-Vous avez aussi la possibilité d'ajouter un sous-dossiers ou de modifier les propriétés du dossier courant.<br>
+Vous avez aussi la possibilité d'ajouter un sous-dossier ou de modifier les propriétés du dossier courant.<br>
 <br>
 <center><img src='~org_lucterios_documents$ListDocuments.jpg' height='250' alt='ListDocuments.jpg' /></center><br>
 Suivant vos permissions, vous pouvez extraire votre fichier pour consultation, le modifier et éventuellement ré-injecter vos corrections.<br>
