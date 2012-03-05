@@ -1,13 +1,13 @@
 <?php
-// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// 	This file is part of Lucterios/Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
 // 	Thanks to have payed a retribution for using this module.
 // 
-// 	Diacamma is free software; you can redistribute it and/or modify
+// 	Lucterios/Diacamma is free software; you can redistribute it and/or modify
 // 	it under the terms of the GNU General Public License as published by
 // 	the Free Software Foundation; either version 2 of the License, or
 // 	(at your option) any later version.
 // 
-// 	Diacamma is distributed in the hope that it will be useful,
+// 	Lucterios/Diacamma is distributed in the hope that it will be useful,
 // 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 // 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // 	GNU General Public License for more details.
@@ -16,9 +16,8 @@
 // 	along with Lucterios; if not, write to the Free Software
 // 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-// Test file write by SDK tool
-// --- Last modification: Date 23 June 2011 12:26:00 By  ---
+// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// Test file write by SDK tool
+// --- Last modification: Date 05 March 2012 1:53:50 By  ---
 
 
 //@TABLES@
@@ -129,8 +128,8 @@ $rec=$comp->m_records[100];
 $test->assertEquals("AAA",$rec["nom"],"Valeur de grid [109,nom]");
 $test->assertEquals("Premier",$rec["description"],"Valeur de grid [109,description]");
 $test->assertEquals("",$rec["parent"],"Valeur de grid [109,parent]");
-$test->assertEquals("Admin{[newline]}Visiteur{[newline]}",$rec["visualisation"],"Valeur de grid [109,visualisation]");
-$test->assertEquals("Admin{[newline]}",$rec["modification"],"Valeur de grid [109,modification]");
+$test->assertEquals("Admin{[newline]}Visiteur",$rec["visualisation"],"Valeur de grid [109,visualisation]");
+$test->assertEquals("Admin",$rec["modification"],"Valeur de grid [109,modification]");
 //LABELFORM - nb
 $comp=$rep->getComponents('nb');
 $test->assertClass("Xfer_Comp_LabelForm",$comp,"Classe de nb");
@@ -152,32 +151,32 @@ $rec=$comp->m_records[100];
 $test->assertEquals("AAA",$rec["nom"],"Valeur de grid [100,nom]");
 $test->assertEquals("Premier",$rec["description"],"Valeur de grid [100,description]");
 $test->assertEquals("",$rec["parent"],"Valeur de grid [100,parent]");
-$test->assertEquals("Admin{[newline]}Visiteur{[newline]}",$rec["visualisation"],"Valeur de grid [100,visualisation]");
-$test->assertEquals("Admin{[newline]}",$rec["modification"],"Valeur de grid [100,modification]");
+$test->assertEquals("Admin{[newline]}Visiteur",$rec["visualisation"],"Valeur de grid [100,visualisation]");
+$test->assertEquals("Admin",$rec["modification"],"Valeur de grid [100,modification]");
 $rec=$comp->m_records[102];
 $test->assertEquals("CCC",$rec["nom"],"Valeur de grid [102,nom]");
 $test->assertEquals("Deuxieme",$rec["description"],"Valeur de grid [102,description]");
 $test->assertEquals("",$rec["parent"],"Valeur de grid [102,parent]");
-$test->assertEquals("Visiteur{[newline]}",$rec["visualisation"],"Valeur de grid [102,visualisation]");
-$test->assertEquals("Visiteur{[newline]}",$rec["modification"],"Valeur de grid [102,modification]");
+$test->assertEquals("Visiteur",$rec["visualisation"],"Valeur de grid [102,visualisation]");
+$test->assertEquals("Visiteur",$rec["modification"],"Valeur de grid [102,modification]");
 $rec=$comp->m_records[101];
 $test->assertEquals("BBB",$rec["nom"],"Valeur de grid [101,nom]");
 $test->assertEquals("Sous AAA",$rec["description"],"Valeur de grid [101,description]");
 $test->assertEquals("AAA",$rec["parent"],"Valeur de grid [101,parent]");
-$test->assertEquals("Admin{[newline]}Visiteur{[newline]}",$rec["visualisation"],"Valeur de grid [101,visualisation]");
-$test->assertEquals("Admin{[newline]}",$rec["modification"],"Valeur de grid [101,modification]");
+$test->assertEquals("Admin{[newline]}Visiteur",$rec["visualisation"],"Valeur de grid [101,visualisation]");
+$test->assertEquals("Admin",$rec["modification"],"Valeur de grid [101,modification]");
 $rec=$comp->m_records[103];
 $test->assertEquals("DDD",$rec["nom"],"Valeur de grid [103,nom]");
 $test->assertEquals("Sous CCC",$rec["description"],"Valeur de grid [103,description]");
 $test->assertEquals("CCC",$rec["parent"],"Valeur de grid [103,parent]");
-$test->assertEquals("Visiteur{[newline]}",$rec["visualisation"],"Valeur de grid [103,visualisation]");
-$test->assertEquals("Visiteur{[newline]}",$rec["modification"],"Valeur de grid [103,modification]");
+$test->assertEquals("Visiteur",$rec["visualisation"],"Valeur de grid [103,visualisation]");
+$test->assertEquals("Visiteur",$rec["modification"],"Valeur de grid [103,modification]");
 $rec=$comp->m_records[104];
 $test->assertEquals("EEE",$rec["nom"],"Valeur de grid [104,nom]");
 $test->assertEquals("Egalement sous CCC",$rec["description"],"Valeur de grid [104,description]");
 $test->assertEquals("CCC",$rec["parent"],"Valeur de grid [104,parent]");
-$test->assertEquals("Visiteur{[newline]}",$rec["visualisation"],"Valeur de grid [104,visualisation]");
-$test->assertEquals("Visiteur{[newline]}",$rec["modification"],"Valeur de grid [104,modification]");
+$test->assertEquals("Visiteur",$rec["visualisation"],"Valeur de grid [104,visualisation]");
+$test->assertEquals("Visiteur",$rec["modification"],"Valeur de grid [104,modification]");
 //LABELFORM - nb
 $comp=$rep->getComponents('nb');
 $test->assertClass("Xfer_Comp_LabelForm",$comp,"Classe de nb");
@@ -222,8 +221,8 @@ $rec=$comp->m_records[101];
 $test->assertEquals("BBB",$rec["nom"],"Valeur de grid [101,nom]");
 $test->assertEquals("Sous AAA",$rec["description"],"Valeur de grid [101,description]");
 $test->assertEquals("AAA",$rec["parent"],"Valeur de grid [101,parent]");
-$test->assertEquals("Admin{[newline]}",$rec["visualisation"],"Valeur de grid [101,visualisation]");
-$test->assertEquals("Admin{[newline]}",$rec["modification"],"Valeur de grid [101,modification]");
+$test->assertEquals("Admin",$rec["visualisation"],"Valeur de grid [101,visualisation]");
+$test->assertEquals("Admin",$rec["modification"],"Valeur de grid [101,modification]");
 //LABELFORM - nb
 $comp=$rep->getComponents('nb');
 $test->assertClass("Xfer_Comp_LabelForm",$comp,"Classe de nb");
