@@ -17,7 +17,7 @@
 // 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// setup file write by SDK tool
-// --- Last modification: Date 05 March 2012 1:53:50 By  ---
+// --- Last modification: Date 06 March 2012 3:52:03 By  ---
 
 $extention_name="org_lucterios_documents";
 $extention_description="Gestion de documents et de fichiers partagés";
@@ -28,7 +28,7 @@ $extension_libre=true;
 
 $version_max=1;
 $version_min=3;
-$version_release=2;
+$version_release=3;
 $version_build=167;
 
 $depencies=array();
