@@ -59,6 +59,7 @@ $readonly=true;
 if ($IsSearch!=0)
 {
 	global $LOGIN_ID;
+	$xfer_result->clearSearchParam();
 	$self->setForSearch($Params,'categorie',"org_lucterios_documents_document.categorie=org_lucterios_documents_visualisation.categorie AND
  org_lucterios_documents_visualisation.Groupe=CORE_users.groupId AND CORE_users.id=$LOGIN_ID",array('org_lucterios_documents_visualisation','CORE_users'));
 
