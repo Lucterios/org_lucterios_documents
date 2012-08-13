@@ -27,10 +27,10 @@ $extension_libre=true;
 $version_max=1;
 $version_min=3;
 $version_release=5;
-$version_build=167;
+$version_build=168;
 
 $depencies=array();
-$depencies[0] = new Param_Depencies("CORE", 1, 3, 1, 3, false);
+$depencies[0] = new Param_Depencies("CORE", 1, 4, 1, 3, false);
 
 $rights=array();
 $rights[0] = new Param_Rigth("Visualisation",0);
