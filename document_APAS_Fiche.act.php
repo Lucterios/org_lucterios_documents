@@ -46,7 +46,7 @@ if ($document>=0) $self->get($document);
 
 $self->lockRecord("document_APAS_Fiche");
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_documents","document_APAS_Fiche",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_documents","document_APAS_Fiche",$Params);
 $xfer_result->Caption="Fiche d'un document";
 $xfer_result->m_context['ORIGINE']="document_APAS_Fiche";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;

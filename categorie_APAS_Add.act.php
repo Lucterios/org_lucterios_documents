@@ -44,7 +44,7 @@ $self=new DBObj_org_lucterios_documents_categorie();
 $categorie=getParams($Params,"categorie",-1);
 if ($categorie>=0) $self->get($categorie);
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_documents","categorie_APAS_Add",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_documents","categorie_APAS_Add",$Params);
 $xfer_result->Caption="";
 //@CODE_ACTION@
 $xfer_result->m_context['parent']=$categorie;

@@ -46,7 +46,7 @@ if ($categorie>=0) $self->get($categorie);
 
 $self->lockRecord("categorie_APAS_AddModify");
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_documents","categorie_APAS_AddModify",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_documents","categorie_APAS_AddModify",$Params);
 $xfer_result->Caption="Ajouter/Modifier un dossier";
 $xfer_result->m_context['ORIGINE']="categorie_APAS_AddModify";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;

@@ -51,7 +51,7 @@ $self=new DBObj_org_lucterios_documents_categorie();
 $parent=getParams($Params,"parent",-1);
 if ($parent>=0) $self->get($parent);
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_documents","categorie_APAS_ImportZipAct",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_documents","categorie_APAS_ImportZipAct",$Params);
 $xfer_result->Caption="Import multiple depuis un fichier zip";
 //@CODE_ACTION@
 if (array_key_exists('zipfile',$Params)) {

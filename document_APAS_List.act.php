@@ -45,7 +45,7 @@ $current_categorie=getParams($Params,"current_categorie",0);
 $IsSearch=getParams($Params,"IsSearch",0);
 $self=new DBObj_org_lucterios_documents_document();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_documents","document_APAS_List",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_documents","document_APAS_List",$Params);
 $xfer_result->Caption="Liste des documents";
 //@CODE_ACTION@
 $img=new  Xfer_Comp_Image("img");

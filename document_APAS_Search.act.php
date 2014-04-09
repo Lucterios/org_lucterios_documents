@@ -41,7 +41,7 @@ function document_APAS_Search($Params)
 {
 $self=new DBObj_org_lucterios_documents_document();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_documents","document_APAS_Search",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_documents","document_APAS_Search",$Params);
 $xfer_result->Caption="Rechercher un document";
 //@CODE_ACTION@
 $img=new  Xfer_Comp_Image("img");

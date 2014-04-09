@@ -54,7 +54,7 @@ $self=new DBObj_org_lucterios_documents_categorie();
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_documents","categorie_APAS_AddModifyAct",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_documents","categorie_APAS_AddModifyAct",$Params);
 $xfer_result->Caption="Valider un dossier";
 //@CODE_ACTION@
 if($categorie>0)
